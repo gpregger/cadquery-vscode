@@ -59,7 +59,7 @@
 			"properties": {
 				"cadquery.cadqueryServerUrl": {
 					"type": "string",
-					"default": "http://192.168.178.100:15000",
+					"default": "http://127.0.0.1:5000",
 					"description": "The url of the CadQuery server that runs your Python code."
 				}
 			}
