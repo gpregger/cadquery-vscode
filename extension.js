@@ -43,10 +43,10 @@ function activate(ctx) {
 			const cq_viewer_path = path.join(static_path, 'cq-viewer.html');
 			html = fs.readFileSync(vscode.Uri.file(cq_viewer_path).fsPath).toString();
 
-			const css_path = path.join(three_cad_viewer_path, 'three-cad-viewer.esm.css');
+			const css_path = path.join(three_cad_viewer_path, 'three-cad-viewer.esm.min.css');
 			html = html.replace('{{cq-view-css}}', getResourceUri(panel.webview, css_path));
 
-			const js_path = path.join(three_cad_viewer_path, 'three-cad-viewer.esm.js');
+			const js_path = path.join(three_cad_viewer_path, 'three-cad-viewer.esm.min.js');
 			html = html.replace('{{cq-view-js}}', getResourceUri(panel.webview, js_path));
 
 			panel.webview.html = html;
