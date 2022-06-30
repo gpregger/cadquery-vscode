@@ -15,3 +15,6 @@
 
 # Cadquery server: generated package files to publish
 /cadquery-server/dist
+
+package-lock.json
+.DS_Store

@@ -16,7 +16,11 @@ function activate(ctx) {
 	const viewer_options = {
 		theme: 'browser',
 		glass: true,
-		control: 'trackball'			
+		control: 'trackball',
+		axes: true,
+		axes0: true,
+		transparent: true,
+		ortho: false
 	}
 
 	vscode.commands.executeCommand('setContext', 'cadquery.enabled', true);
@@ -39,10 +43,10 @@ function activate(ctx) {
 			const cq_viewer_path = path.join(static_path, 'cq-viewer.html');
 			html = fs.readFileSync(vscode.Uri.file(cq_viewer_path).fsPath).toString();
 
-			const css_path = path.join(three_cad_viewer_path, 'three-cad-viewer.esm.min.css');
+			const css_path = path.join(three_cad_viewer_path, 'three-cad-viewer.esm.css');
 			html = html.replace('{{cq-view-css}}', getResourceUri(panel.webview, css_path));
 
-			const js_path = path.join(three_cad_viewer_path, 'three-cad-viewer.esm.min.js');
+			const js_path = path.join(three_cad_viewer_path, 'three-cad-viewer.esm.js');
 			html = html.replace('{{cq-view-js}}', getResourceUri(panel.webview, js_path));
 
 			panel.webview.html = html;
@@ -81,7 +85,7 @@ function activate(ctx) {
 					if (error_code == 0) {
 						vscode.window.showErrorMessage(`Can not connect to CadQuery server. Is it started?`);
 					} else {
-						vscode.window.showErrorMessage(`CadQuery server returned response code ${xhr.status}.`);
+						vscode.window.showErrorMessage(`CadQuery server returned response code .`);
 					}
 				}
 			);
