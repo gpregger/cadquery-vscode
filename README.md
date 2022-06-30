@@ -1,3 +1,7 @@
+## Fork modifications
+- More viewer options
+- persistent camera settings across re-renders
+
 # VSCode CadQuery extension
 
 Build parametric 2D/3D CAD models in VSCode with the [CadQuery](https://github.com/CadQuery/cadquery) library.
