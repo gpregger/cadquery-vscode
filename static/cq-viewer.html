@@ -25,6 +25,7 @@
 		let options = get_size_options();
 		let viewer = null;
 		let model = [ {}, {} ];
+		let viewerSettings = {};
 
 		function nc(change) {
 			// console.debug('viewer info:', JSON.stringify(change, null, 2));
@@ -39,17 +40,39 @@
 		}
 
 		function render() {
-			let cameraSettings
 			try {
-				cameraSettings = viewer.getCameraLocationSettings();
+				storeViewerSettings();
 			} catch(error) { console.log(error) }
 			viewer.clear();
 			const [ shapes, states ] = model;
 			const [ group, tree ] = viewer.renderTessellatedShapes(shapes, states, options);
 			viewer.render(group, tree, states, options);
 			try {
-				viewer.setCameraLocationSettings(cameraSettings.position, cameraSettings.quaternion, cameraSettings.target, cameraSettings.zoom);
+				restoreViewerSettings();				
 			} catch(error) { console.log(error) }
+		}
+
+		function storeViewerSettings() {
+			viewerSettings.cameraSettings = viewer.getCameraLocationSettings();
+			viewerSettings.transparent = viewer.getTransparent();
+			viewerSettings.axes = viewer.getAxes();
+			viewerSettings.axes0 = viewer.getAxes0();
+			viewerSettings.ortho = viewer.getOrtho();
+			viewerSettings.blackEdges = viewer.getBlackEdges();
+			viewerSettings.grids = [...viewer.getGrids()];
+		}
+
+		function restoreViewerSettings() {
+			viewer.setCameraLocationSettings(viewerSettings.cameraSettings.position,
+											 viewerSettings.cameraSettings.quaternion,
+											 viewerSettings.cameraSettings.target,
+											 viewerSettings.cameraSettings.zoom);
+			viewer.setTransparent(viewerSettings.transparent);
+			viewer.setAxes(viewerSettings.axes);
+			viewer.setAxes0(viewerSettings.axes0);
+			viewer.setOrtho(viewerSettings.ortho);
+			viewer.setBlackEdges(viewerSettings.blackEdges);
+			viewer.setGrids(viewerSettings.grids);
 		}
 
 		function get_size_options() {

@@ -16,11 +16,7 @@ function activate(ctx) {
 	const viewer_options = {
 		theme: 'browser',
 		glass: true,
-		control: 'trackball',
-		axes: true,
-		axes0: true,
-		transparent: true,
-		ortho: false
+		control: 'trackball'
 	}
 
 	vscode.commands.executeCommand('setContext', 'cadquery.enabled', true);
